@@ -7,8 +7,6 @@ class Solution:
         rows = len(grid)
         cols = len(grid[0])
         moves = [(-1, 0), (1, 0), (0, -1), (0, 1)]
-        r = 0
-        c = 0
         res = 0
         def dfs(r, c, grid):
             if r >= rows or c >= cols or grid[r][c] == '0' or r < 0 or c < 0:
