@@ -3,38 +3,50 @@ class Solution:
         """
         Do not return anything, modify board in-place instead.
         """
-        if not board or not board[0]:
+        # start with 2d matrix iteration
+        # if meet 0, perform traversal within
+            # add every r c to visited set
+            # create value is_edge
+            # if r or c on the edge, is_edge = True
+        # after island traversal
+            # if is_edge == True:
+                # skip
+            # else: 
+                # go through visited and turn 0 to x
+        # continue until the end of the grid
+        if not board:
             return
 
-        
+        moves = [(-1,0), (1, 0), (0, -1), (0, 1)]
+        rows = len(board)
+        cols = len(board[0])
+        visited = set()
 
-        self.rows = len(board)
-        self.cols = len(board[0])
+        def dfs(r, c):
+            # need nonlocal, since value is being reassigned. we are not creating new var named is_edge inside
+            nonlocal is_edge # use for accessing values outside of nested funcitions
+            if r < 0 or r >= rows or c < 0 or c >= cols or board[r][c] == "X" or (r,c) in visited:
+                return 
+            if r == 0 or r == rows - 1 or c == 0 or c == cols - 1:
+                is_edge = True
 
-        from itertools import product
+            # same object, just modified, no need for nonlocal
+            visited.add((r, c)) 
+            curr_region.append((r, c))
+            
+            for dr, dc in moves:
+                nr = r + dr
+                nc = c + dc
+                dfs(nr, nc)
 
-        borders = list(product(range(0, self.rows), [0, self.cols - 1])) + list(product([0, self.rows - 1], range(0, self.cols)))
 
-        for r, c in borders:
-            self.DFS(board, r, c)
+        for r in range(rows):
+            for c in range(cols):
+                if board[r][c] == "O" and (r,c) not in visited:
+                    curr_region = []
+                    is_edge = False
+                    dfs(r,c)
 
-        for r in range(self.rows):
-            for c in range(self.cols):
-                if board[r][c] == "O":
-                    board[r][c] = "X"  # captured
-                elif board[r][c] == "E":
-                    board[r][c] = "O"  # escaped 
-
-    def DFS(self, board, row, col):
-        if board[row][col] != "O":
-            return
-        
-        board[row][col] = "E"
-        if row < self.rows - 1:
-            self.DFS(board, row + 1, col)
-        if col < self.cols - 1:
-            self.DFS(board, row, col + 1)
-        if row > 0:
-            self.DFS(board, row - 1, col)
-        if col > 0:
-            self.DFS(board, row, col - 1)
+                    if not is_edge:
+                        for r, c in curr_region:
+                            board[r][c] = "X"
