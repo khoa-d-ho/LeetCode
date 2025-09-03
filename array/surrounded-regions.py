@@ -1,10 +1,13 @@
+from typing import List
+import collections
+
 class Solution:
     def solve(self, board: List[List[str]]) -> None:
         """
         Do not return anything, modify board in-place instead.
         """
         # start with 2d matrix iteration
-        # if meet 0, perform traversal within
+        # if meet O, perform traversal within
             # add every r c to visited set
             # create value is_edge
             # if r or c on the edge, is_edge = True
@@ -12,7 +15,7 @@ class Solution:
             # if is_edge == True:
                 # skip
             # else: 
-                # go through visited and turn 0 to x
+                # go through visited and turn O to x
         # continue until the end of the grid
         if not board:
             return
@@ -22,31 +25,30 @@ class Solution:
         cols = len(board[0])
         visited = set()
 
-        def dfs(r, c):
-            # need nonlocal, since value is being reassigned. we are not creating new var named is_edge inside
-            nonlocal is_edge # use for accessing values outside of nested funcitions
-            if r < 0 or r >= rows or c < 0 or c >= cols or board[r][c] == "X" or (r,c) in visited:
-                return 
-            if r == 0 or r == rows - 1 or c == 0 or c == cols - 1:
-                is_edge = True
-
-            # same object, just modified, no need for nonlocal
-            visited.add((r, c)) 
-            curr_region.append((r, c))
-            
-            for dr, dc in moves:
-                nr = r + dr
-                nc = c + dc
-                dfs(nr, nc)
-
-
         for r in range(rows):
             for c in range(cols):
                 if board[r][c] == "O" and (r,c) not in visited:
                     curr_region = []
                     is_edge = False
-                    dfs(r,c)
+                    
+                    stack = [(r, c)]
+                    visited.add((r, c))
 
+                    while stack:
+                        row, col = stack.pop()
+                        curr_region.append((row, col))
+                        
+                        if row == 0 or row == rows - 1 or col == 0 or col == cols - 1:
+                            is_edge = True
+                        
+                        for dr, dc in moves:
+                            nr, nc = row + dr, col + dc
+                            if 0 <= nr < rows and 0 <= nc < cols and \
+                               board[nr][nc] == 'O' and (nr, nc) not in visited:
+                                
+                                visited.add((nr, nc))
+                                stack.append((nr, nc))
+                                
                     if not is_edge:
-                        for r, c in curr_region:
-                            board[r][c] = "X"
+                        for row, col in curr_region:
+                            board[row][col] = "X"
