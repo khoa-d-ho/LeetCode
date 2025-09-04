@@ -18,8 +18,8 @@ class Solution:
                 for result in operations:
                     if result == goal:
                         return ops + 1
-                    if not (0 <= result <= 1000) or result in visited:
-                        break
+                    if not (0 <= result <= 1000) or result in visited: # skip
+                        continue
                     visited.add(result)
                     queue.append((result, ops + 1))
         return -1
