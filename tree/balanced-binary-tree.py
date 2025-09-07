@@ -11,9 +11,11 @@ class Solution:
                 return 0
             left = checker(root.left)
             right = checker(root.right)
+            if left == -1 or right == -1:
+                return -1
             if abs(left - right) > 1:
                 return -1
-            return 1 + max(checker(root.left), checker(root.right))
+            return 1 + max(left, right)
         
         res = checker(root)
         if res == -1:
