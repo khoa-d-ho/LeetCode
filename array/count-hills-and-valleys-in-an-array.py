@@ -18,7 +18,7 @@ class Solution:
                 curr = 1 # hill
             
             if curr != status:
-                status == curr
+                status = curr
                 res += 1
         return res
                 
