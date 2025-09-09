@@ -2,9 +2,10 @@ import heapq
 
 class Solution:
     def minMeetingRooms(self, intervals: List[List[int]]) -> int:
-        # heapq.heapify
-        # heapq.heappop
-        # heapq.heappush
+        # sort by starting time
+        # heap using ending time
+            # if ending time < next starting time -> room available
+            # else new room
         if not intervals:
             return 0
         
