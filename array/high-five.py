@@ -20,5 +20,6 @@ class Solution:
             list(heap)
             curr_list.append(int(sum(heap) / 5))
             res.append(curr_list)
+        res.sort(key = lambda student : student[0])
         return res
             
