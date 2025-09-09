@@ -23,23 +23,20 @@ class Solution:
 
         trips.sort(key=lambda k: k[1])
 
-        seats = capacity - trips[0][0]
+        total = trips[0][0]
         heap = []
         heapq.heapify(heap)
         heapq.heappush(heap, (trips[0][2], trips[0][0]))
         
+        # drop off first, pick up later
         for i in range(1, len(trips)):
             p, s, e = trips[i][0], trips[i][1], trips[i][2]
-            if s > heap[0][0]:
-                seats += heap[0][1]
+            if s >= heap[0][0]:
+                total -= heap[0][1]
                 heapq.heappop(heap)
             heapq.heappush(heap, (e, p))
-            seats -= p
+            total += p
             
-            if seats < 0:
+            if total > capacity:
                 return False
         return True
-
-        
-
-        
