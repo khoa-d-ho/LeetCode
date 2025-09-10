@@ -30,11 +30,14 @@ class Solution:
         
         # drop off first, pick up later
         for i in range(1, len(trips)):
-            p, s, e = trips[i][0], trips[i][1], trips[i][2]
-            if s >= heap[0][0]:
-                heapq.heappop(heap)
             print(heap)
-            print(total)
+            p, s, e = trips[i][0], trips[i][1], trips[i][2]
+            while heap:
+                if s >= heap[0][0]:
+                    total -= heap[0][1]
+                    heapq.heappop(heap)
+                else:
+                    break
             heapq.heappush(heap, (e, p))
             total += p
             
