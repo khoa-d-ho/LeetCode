@@ -11,6 +11,8 @@ class MedianFinder:
         heapq.heappush(self.maxheap, num / -1)
         if len(self.maxheap) - len(self.minheap) > 1 or (self.minheap and self.maxheap and (self.maxheap[0] / -1) > self.minheap[0]):
             heapq.heappush(self.minheap, (heapq.heappop(self.maxheap) / -1)) 
+        if len(self.minheap) - len(self.maxheap) > 1:
+            heapq.heappush(self.maxheap, (heapq.heappop(self.minheap) / -1)) 
         print("max")
         print(self.maxheap)
         print("min")
