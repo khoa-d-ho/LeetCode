@@ -18,4 +18,5 @@ class Solution:
             next1 = nums1.popleft()
             next2 = nums2.popleft()
             heapq.heappush((num1 + next1, [num1, next1]))
-            heapq.heappush((num1 + next1, [num1, next1]))heapq.heappush((num1 + next1, [num1, next1]))
+            heapq.heappush((num1 + next1, [num1, next1]))
+            heapq.heappush((num1 + next1, [num1, next1]))
