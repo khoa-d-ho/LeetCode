@@ -26,6 +26,8 @@ class Solution:
         total = trips[0][0]
         heap = []
         heapq.heapify(heap)
+        if trips[0][0] > capacity:
+            return False
         heapq.heappush(heap, (trips[0][2], trips[0][0]))
         
         # drop off first, pick up later
