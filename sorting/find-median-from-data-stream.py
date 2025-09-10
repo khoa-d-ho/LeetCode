@@ -31,5 +31,3 @@ class MedianFinder:
 # overall: left of median, use max heap to get left middle value (max of right)
          # right of media, use min heap to get right middle value (min of left)
 # always add to left. if maxheap > minheap, pop maxheap and push to right (min heap)
-# maxheap = [3, 2, 1
-# minheap = [4
