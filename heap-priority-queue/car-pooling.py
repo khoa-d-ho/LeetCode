@@ -24,11 +24,11 @@ class Solution:
         trips.sort(key=lambda k: k[1])
 
         total = trips[0][0]
-        heap = []
+        heap = [(trips[0][2], trips[0][0])]
         heapq.heapify(heap)
         if trips[0][0] > capacity:
             return False
-        heapq.heappush(heap, (trips[0][2], trips[0][0]))
+        # heapq.heappush(heap, (trips[0][2], trips[0][0]))
         
         # drop off first, pick up later
         for i in range(1, len(trips)):
