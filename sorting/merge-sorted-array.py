@@ -7,10 +7,8 @@ class Solution:
         ptr2 = n - 1
 
         for i in range(m+n-1, -1, -1):
-            if ptr2 < 0: # second array empty => stop 
+            if ptr2 < 0: 
                 break
-
-            # check for ptr1, prevent index -1
             if ptr1 >= 0 and nums1[ptr1] > nums2[ptr2]: 
                 nums1[i] = nums1[ptr1]
                 ptr1 -= 1
