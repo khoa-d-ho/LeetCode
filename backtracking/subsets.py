@@ -1,18 +1,20 @@
 class Solution:
     def subsets(self, nums: List[int]) -> List[List[int]]:
-        result = []
-        binary = []
-        x = len(nums)
-        for i in range(2**x):
-            binary.append(bin(i)[2:].zfill(x)) # add leading 0s
-        
-        for n in binary:
-            temp = []
-            for index in range(len(n)):
-                if n[index] == "1":
-                    temp.append(nums[index])
-            result.append(temp)
+        # 1 2 3
+        # none, 1, 12, 123
+        # 2, 23
+         
+        res = []
+        n = len(nums)
 
-        return result
-                    
-            
+        def backtrack(idx, curr):
+            res.append(curr[:]) # dont reference current list
+            print(res)
+            for i in range(idx, n):
+                curr.append(nums[i])
+                backtrack(i+1, curr)
+                curr.pop() # 12 13
+
+        backtrack(0, [])
+        return res
+        
