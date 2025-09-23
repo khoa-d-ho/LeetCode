@@ -9,7 +9,6 @@ class Solution:
 
         def backtrack(idx, curr):
             res.append(curr[:]) # dont reference current list
-            print(res)
             for i in range(idx, n):
                 curr.append(nums[i])
                 backtrack(i+1, curr)
