@@ -9,6 +9,8 @@ class Solution:
         def backtrack(first, curr, curr_sum):
             if curr_sum == target:
                 res.append(curr[:])
+            if curr_sum > target:
+                return
 
             for i in range(first, n):
                 if i > first and candidates[i] == candidates[i-1]:
