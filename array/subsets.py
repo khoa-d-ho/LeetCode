@@ -7,9 +7,9 @@ class Solution:
         res = []
         n = len(nums)
 
-        def backtrack(idx, curr):
+        def backtrack(first, curr):
             res.append(curr[:]) # dont reference current list
-            for i in range(idx, n):
+            for i in range(first, n):
                 curr.append(nums[i])
                 backtrack(i+1, curr)
                 curr.pop() # 12 13
