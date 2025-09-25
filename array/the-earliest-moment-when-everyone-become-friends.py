@@ -24,15 +24,13 @@ class UnionFind:
 class Solution:
     def earliestAcq(self, logs: List[List[int]], n: int) -> int:
         logs.sort()
-        last_true = 0
         graph = UnionFind(n)
-
+        set_count = n
+        
         for time, a, b in logs:
             if graph.union(a, b):
-                last_true = time
+                set_count -= 1
+                if set_count == 1:
+                    return time
         
-        sets = {graph.find(u) for u in range(n)}
-        if len(sets) > 1:
-            return -1
-        else:
-            return last_true
+        return -1
