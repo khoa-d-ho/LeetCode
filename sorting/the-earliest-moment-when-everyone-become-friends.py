@@ -23,6 +23,7 @@ class UnionFind:
 
 class Solution:
     def earliestAcq(self, logs: List[List[int]], n: int) -> int:
+        logs.sort()
         last_true = 0
         graph = UnionFind(n)
 
