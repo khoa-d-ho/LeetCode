@@ -1,10 +1,15 @@
 class Solution:
-    def lengthOfLIS(self, nums: List[int]) -> int:
-        dp = [1]*len(nums)
-        
+
+    def lengthOfLIS(self, nums):
+        dp = [1] * len(nums)
+
         for i in range(1, len(nums)):
-            for j in range(0, i):
+            max_valid = 1
+            for j in range(i):
+                # compare nums
                 if nums[i] > nums[j]:
-                    dp[i] = max(dp[i], dp[j] + 1)
-                    
+                    # max
+                    if dp[j] + 1 > max_valid:
+                        max_valid = dp[j] + 1
+            dp[i] = max_valid
         return max(dp)
