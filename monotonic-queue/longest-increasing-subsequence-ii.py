@@ -15,7 +15,7 @@ class Solution:
                     if curr_max < dp[j] + 1:
                         curr_max = dp[j] + 1
             dp[i] = curr_max
-        print(dp)
+
         return max(dp)
                 
                 
