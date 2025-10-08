@@ -7,15 +7,26 @@
 
 class Solution:
     def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
-        
 
-        if p.val <  root.val and q.val < root.val:
+        # recursion
+        # recurse to the subtree which has both p and q
+        # return curr_node if 
+            # p and q in diff subtrees
+            # OR either p or q is curr_node
+        # DFS
+
+        # in order traversal gives flattened sorted tree
+        # move left if p and q < root
+        # move right if p and q > root
+        # if p or q == root:
+            # return root
+        if p.val < root.val and q.val < root.val:
             return self.lowestCommonAncestor(root.left, p, q)
-        elif p.val >  root.val and q.val > root.val:
-            return self.lowestCommonAncestor(root.right, p, q)
-        else:
-            return root
-        
-            
+        if p.val > root.val and q.val > root.val:
+            return self.lowestCommonAncestor(root.left, p, q)
+        return root
 
-            
+        '''
+        p = 2
+        q = 8
+        '''
